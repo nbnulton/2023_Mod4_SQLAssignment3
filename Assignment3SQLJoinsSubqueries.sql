@@ -53,12 +53,20 @@ from movie
 
 select * from movie
 
--- 7. show all customers who made a single payment above $6.99
-select customer.customer_id, customer.first_name, customer.last_name, amount
+-- 7. show all customers who made a single payment above $6.99 (use subqueries)
+select *
 from customer
-full join payment 
-on customer.customer_id = payment.customer_id 
-where amount > 6.99;
+where customer_id in(
+	select customer_id
+	from payment
+	where amount > 6.99;
+)
+
+-- select customer.customer_id, customer.first_name, customer.last_name, amount
+-- from customer
+-- full join payment 
+-- on customer.customer_id = payment.customer_id 
+-- where amount > 6.99;
 
 
 -- 8. how many free rentals did our stores give away
